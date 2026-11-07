@@ -60,7 +60,7 @@
 ```yaml
 services:
   douyin-chat-export:
-    image: ghcr.io/teambreakerr/douyin-chat-export:latest
+    image: ghcr.io/fmn9110/douyin-chat-export:latest
     container_name: douyin-chat-export
     ports:
       - "8000:8000"
@@ -124,8 +124,8 @@ docker compose up -d
 
 #### 版本记录与正式发布
 
-每个正式版本的新增功能、修复和升级说明见 [Releases](https://github.com/TeamBreakerr/douyin-chat-export/releases)。
-镜像文件保存在 [GHCR Packages](https://github.com/TeamBreakerr/douyin-chat-export/pkgs/container/douyin-chat-export)。
+每个正式版本的新增功能、修复和升级说明见 [Releases](https://github.com/Fmn9110/douyin-chat-export/releases)。
+镜像文件保存在 [GHCR Packages](https://github.com/Fmn9110/douyin-chat-export/pkgs/container/douyin-chat-export)。
 
 维护者发布新版本时：
 
@@ -141,7 +141,7 @@ docker compose up -d
 <summary><b>从源码构建</b>（想改代码或不信任预构建镜像时）</summary>
 
 ```bash
-git clone https://github.com/TeamBreakerr/douyin-chat-export.git
+git clone https://github.com/Fmn9110/douyin-chat-export.git
 cd douyin-chat-export
 # 取消 docker-compose.yml 里 “build: .” 的注释，然后：
 docker compose up -d --build
@@ -185,7 +185,7 @@ networks:
 ### 本地运行
 
 ```bash
-git clone https://github.com/TeamBreakerr/douyin-chat-export.git
+git clone https://github.com/Fmn9110/douyin-chat-export.git
 cd douyin-chat-export
 
 # Python 环境

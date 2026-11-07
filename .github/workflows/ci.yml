@@ -82,7 +82,7 @@ jobs:
         id: meta
         with:
           # GHCR 要求镜像名全小写，不能直接用 github.repository
-          images: ghcr.io/teambreakerr/douyin-chat-export
+          images: ghcr.io/fmn9110/douyin-chat-export
       - name: Build and push by digest
         id: build
         uses: docker/build-push-action@v6
@@ -90,7 +90,7 @@ jobs:
           context: .
           platforms: linux/${{ matrix.arch }}
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,name=ghcr.io/teambreakerr/douyin-chat-export,push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=ghcr.io/fmn9110/douyin-chat-export,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.arch }}
           cache-to: type=gha,mode=max,scope=${{ matrix.arch }}
       - name: Export digest
@@ -125,7 +125,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/teambreakerr/douyin-chat-export
+          images: ghcr.io/fmn9110/douyin-chat-export
           # main 发布测试镜像；v* tag 发布正式镜像，并移动 latest。
           flavor: latest=false
           tags: |
@@ -140,9 +140,9 @@ jobs:
         run: |
           docker buildx imagetools create \
             $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf 'ghcr.io/teambreakerr/douyin-chat-export@sha256:%s ' *)
+            $(printf 'ghcr.io/fmn9110/douyin-chat-export@sha256:%s ' *)
       - name: Inspect
-        run: docker buildx imagetools inspect ghcr.io/teambreakerr/douyin-chat-export:${{ steps.meta.outputs.version }}
+        run: docker buildx imagetools inspect ghcr.io/fmn9110/douyin-chat-export:${{ steps.meta.outputs.version }}
 
   release:
     name: Publish GitHub Release
@@ -175,7 +175,7 @@ jobs:
           if [[ -f "$notes_file" ]]; then
             args+=(--notes-file "$notes_file")
           else
-            printf '## Docker 镜像\n\n`ghcr.io/teambreakerr/douyin-chat-export:%s`\n\n支持 linux/amd64 和 linux/arm64。\n\n将 Compose 的 image 标签改为上述版本后执行：\n\n```bash\ndocker compose pull\ndocker compose up -d\n```\n' "$version" > "$RUNNER_TEMP/release-notes.md"
+            printf '## Docker 镜像\n\n`ghcr.io/fmn9110/douyin-chat-export:%s`\n\n支持 linux/amd64 和 linux/arm64。\n\n将 Compose 的 image 标签改为上述版本后执行：\n\n```bash\ndocker compose pull\ndocker compose up -d\n```\n' "$version" > "$RUNNER_TEMP/release-notes.md"
             args+=(--notes-file "$RUNNER_TEMP/release-notes.md" --generate-notes)
           fi
           gh release create "$RELEASE_TAG" "${args[@]}"
